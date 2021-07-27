@@ -49,13 +49,13 @@ public class ThirdActivity extends AppCompatActivity {
         etYear.setText(currentSong.getYearReleased()+"");
         switch (currentSong.getStars()){
             case 5: rb5.setChecked(true);
-                    break;
+                break;
             case 4: rb4.setChecked(true);
-                    break;
+                break;
             case 3: rb3.setChecked(true);
-                    break;
+                break;
             case 2: rb2.setChecked(true);
-                    break;
+                break;
             case 1: rb1.setChecked(true);
         }
 
@@ -80,8 +80,6 @@ public class ThirdActivity extends AppCompatActivity {
                 int result = dbh.updateSong(currentSong);
                 if (result>0){
                     Toast.makeText(ThirdActivity.this, "Song updated", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent();
-                    setResult(RESULT_OK);
                     finish();
                 } else {
                     Toast.makeText(ThirdActivity.this, "Update failed", Toast.LENGTH_SHORT).show();
@@ -97,8 +95,6 @@ public class ThirdActivity extends AppCompatActivity {
                 int result = dbh.deleteSong(currentSong.getId());
                 if (result>0){
                     Toast.makeText(ThirdActivity.this, "Song deleted", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent();
-                    setResult(RESULT_OK);
                     finish();
                 } else {
                     Toast.makeText(ThirdActivity.this, "Delete failed", Toast.LENGTH_SHORT).show();

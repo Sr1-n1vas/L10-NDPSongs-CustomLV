@@ -42,8 +42,7 @@
         android:id="@+id/etYear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/hint_year"
-        android:inputType="number" />
+        android:hint="@string/hint_year" />
 
 
     <TextView

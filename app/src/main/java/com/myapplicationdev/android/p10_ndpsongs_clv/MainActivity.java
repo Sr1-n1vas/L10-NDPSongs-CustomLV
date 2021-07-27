@@ -23,12 +23,12 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle(getTitle().toString() + " ~ " + getResources().getText(R.string.title_activity_main));
 
-        etTitle = findViewById(R.id.etTitle);
-        etSingers = findViewById(R.id.etSingers);
-        etYear = findViewById(R.id.etYear);
-        btnInsert = findViewById(R.id.btnInsertSong);
-        btnShowList = findViewById(R.id.btnShowList);
-        rg = findViewById(R.id.rgStars);
+        etTitle = (EditText) findViewById(R.id.etTitle);
+        etSingers = (EditText) findViewById(R.id.etSingers);
+        etYear = (EditText) findViewById(R.id.etYear);
+        btnInsert = (Button) findViewById(R.id.btnInsertSong);
+        btnShowList = (Button) findViewById(R.id.btnShowList);
+        rg = (RadioGroup) findViewById(R.id.rgStars);
 
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,22 +41,26 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
+
                 String year_str = etYear.getText().toString().trim();
-                int year = Integer.valueOf(year_str);
-                int stars = getStars();
-
-                DBHelper dbh = new DBHelper(MainActivity.this);
-                long result = dbh.insertSong(title, singers, year, stars);
-
-                if (result != -1) {
-                    Toast.makeText(MainActivity.this, "Song inserted", Toast.LENGTH_LONG).show();
-                    etTitle.setText("");
-                    etSingers.setText("");
-                    etYear.setText("");
-                } else {
-                    Toast.makeText(MainActivity.this, "Insert failed", Toast.LENGTH_LONG).show();
+                int year = 0;
+                try {
+                    year = Integer.valueOf(year_str);
+                } catch (Exception e){
+                    Toast.makeText(MainActivity.this, "Invalid  year", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
+                DBHelper dbh = new DBHelper(MainActivity.this);
+
+                int stars = getStars();
+                dbh.insertSong(title, singers, year, stars);
+                dbh.close();
+                Toast.makeText(MainActivity.this, "Inserted", Toast.LENGTH_LONG).show();
+
+                etTitle.setText("");
+                etSingers.setText("");
+                etYear.setText("");
 
             }
         });
@@ -93,5 +97,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return stars;
     }
+
 
 }

@@ -1,5 +1,7 @@
 package com.myapplicationdev.android.p10_ndpsongs_clv;
 
+import androidx.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class Song implements Serializable {
@@ -9,13 +11,6 @@ public class Song implements Serializable {
 	private String singers;
 	private int yearReleased;
 	private int stars;
-
-    public Song(String title, String singers, int yearReleased, int stars) {
-        this.title = title;
-        this.singers = singers;
-        this.yearReleased = yearReleased;
-        this.stars = stars;
-    }
 
     public Song(int id, String title, String singers, int yearReleased, int stars) {
         this.id = id;
@@ -70,20 +65,20 @@ public class Song implements Serializable {
         return this;
     }
 
+    @NonNull
     @Override
     public String toString() {
         String starsString = "";
-        if (stars == 5){
-            starsString = "*****";
-        } else if (stars == 4){
-            starsString = "****";
-        }
-
-        //or
         for(int i = 0; i < stars; i++){
-            starsString += "*";
+            starsString += " * ";
         }
-        return title + "\n" + singers + " - " + yearReleased + "\n" + starsString;
+        return starsString;
 
+    }
+    public String toStringYear()
+    {
+        String year = "";
+        year = String.valueOf(getYearReleased());
+        return year;
     }
 }
